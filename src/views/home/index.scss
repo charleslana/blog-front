@@ -21,3 +21,49 @@
   padding: 20px;
   font-size: 20px;
 }
+
+.home-content {
+  width: 100%;
+  padding: 5%;
+}
+
+.home-content-separator {
+  width: 33%;
+  height: 250px;
+  float: left;
+  padding: 1%;
+  margin-bottom: 5%;
+}
+
+.home-content-post-card {
+  width: 100%;
+  height: 60%;
+  background-color: #2a2a2a;
+  color: white;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 35px;
+}
+
+.home-content-post-title {
+  width: 100%;
+  height: auto;
+  padding: 2%;
+  color: #2e6eac;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 20px;
+  margin-bottom: 4%;
+}
+
+.home-content-post-description {
+  width: 100%;
+  height: auto;
+  padding: 2%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
