@@ -9,13 +9,6 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-$primary-color: #2e6eac;
-$warning-color: #e17b24;
-$success-color: #25ae60;
-$danger-color: #e34a3a;
-$black-color: #000000;
-$white-color: #ffffff;
-
 .content {
   margin-top: 10%;
 }

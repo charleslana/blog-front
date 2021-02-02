@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './index.scss';
+import './index.css';
 import BgHome from '../../assets/layout/images/home.jpg';
 
 class Home extends Component {
