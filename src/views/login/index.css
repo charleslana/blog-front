@@ -1,0 +1,9 @@
+.login {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.login h1 {
+    text-align: center;
+    margin-bottom: 15px;
+}
