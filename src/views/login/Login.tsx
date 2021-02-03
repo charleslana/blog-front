@@ -1,20 +1,23 @@
 import React, {Component} from 'react';
 import './index.css';
 import Toast from "../../components/toast/Toast";
+import Loading from "../../components/loading/Loading";
 
 class Login extends Component {
 
     state = {
         toastMessage: null,
         toastType: null,
-        open: false
+        open: false,
+        loading: false
     }
 
     openToast() {
         this.setState({
             toastMessage: 'Test message',
             toastType: 'danger',
-            open: true
+            open: true,
+            loading: true
         });
     }
 
@@ -37,11 +40,16 @@ class Login extends Component {
                         <input type={'password'} id={'password'} placeholder={'Inform your password'}/>
                     </label>
                     <label>
-                        <button type={'button'} onClick={() => this.openToast()}>Login</button>
+                        {this.state.loading ?
+                            <button type={'button'} onClick={() => this.openToast()} disabled={true}><Loading/>Login
+                            </button>
+                            :
+                            <button type={'button'} onClick={() => this.openToast()}>Login</button>
+                        }
                     </label>
                 </div>
                 {this.state.open &&
-                    <Toast text={this.state.toastMessage} type={this.state.toastType} toastFunction={this.closeToast}/>
+                <Toast text={this.state.toastMessage} type={this.state.toastType} toastFunction={this.closeToast}/>
                 }
             </div>
         );

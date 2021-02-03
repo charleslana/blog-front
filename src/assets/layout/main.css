@@ -12,3 +12,8 @@ body {
 .content {
   margin-top: 10%;
 }
+
+.button:disabled, button[disabled] {
+  background-color: #cccccc !important;
+  cursor: not-allowed !important;
+}
