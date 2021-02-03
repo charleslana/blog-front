@@ -1,0 +1,50 @@
+.toast {
+    position: fixed;
+    right: 2%;
+    top: 0;
+    width: auto;
+    transition: transform .6s ease-in-out;
+    animation: toast-in-right .5s;
+    z-index: 2;
+}
+
+.toast-danger {
+    background-color: #e34a3a;
+    color: white;
+    width: 300px;
+    height: auto;
+    padding: 10%;
+    margin-top: 10px;
+    position: relative;
+}
+
+.toast-success {
+    background-color: #25ae60;
+    color: white;
+    width: 300px;
+    height: auto;
+    padding: 10%;
+    margin-top: 10px;
+    position: relative;
+}
+
+.toast button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+    padding: 2%;
+    outline: none;
+    cursor: pointer;
+}
+
+@keyframes toast-in-right {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
