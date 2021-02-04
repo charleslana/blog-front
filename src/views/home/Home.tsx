@@ -3,6 +3,7 @@ import './index.css';
 import BgHome from '../../assets/layout/images/home.jpg';
 import Posts from "../../api/Posts";
 import Loading from "../../components/loading/Loading";
+import {Link} from 'react-router-dom';
 
 class Home extends Component {
 
@@ -33,7 +34,7 @@ class Home extends Component {
                         <Loading/>
                         :
                         this.items.map(item =>
-                            <div key={item.id}>
+                            <Link to={`/post/${item.id}`} key={item.id}>
                                 <div className={'home-content-separator'}>
                                     <div
                                         className={`home-content-post-card category-${item.category.toLowerCase()}`}>
@@ -46,7 +47,7 @@ class Home extends Component {
                                         {item.description}
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     }
                 </div>
