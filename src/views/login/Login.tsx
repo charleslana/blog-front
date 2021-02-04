@@ -41,8 +41,7 @@ class Login extends Component {
                     </label>
                     <label>
                         {this.state.loading ?
-                            <button type={'button'} onClick={() => this.openToast()} disabled={true}><Loading/>Login
-                            </button>
+                            <button type={'button'} disabled={true}><Loading/>Login</button>
                             :
                             <button type={'button'} onClick={() => this.openToast()}>Login</button>
                         }

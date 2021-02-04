@@ -1,7 +1,16 @@
 import React, {Component} from 'react';
 import './index.css';
+import Loading from "../../components/loading/Loading";
 
 class Register extends Component {
+
+    state = {
+        loading: false
+    }
+
+    handleSubmit() {
+        this.setState({loading: true});
+    }
 
     render() {
         return (
@@ -22,7 +31,11 @@ class Register extends Component {
                         <input type={'password'} id={'confirm_password'} placeholder={'Confirm your password'}/>
                     </label>
                     <label>
-                        <button type={'button'}>Register</button>
+                        {this.state.loading ?
+                            <button type={'button'} disabled={true}><Loading/>Register</button>
+                            :
+                            <button type={'button'} onClick={() => this.handleSubmit()}>Register</button>
+                        }
                     </label>
                 </div>
             </div>
