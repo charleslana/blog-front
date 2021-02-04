@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import './index.css';
-import PostPropInterface from "../interfaces/PostPropInterface";
+import PostInterface from "../interfaces/PostInterface";
 import Loading from "../../components/loading/Loading";
 
-class Post extends Component<PostPropInterface> {
+class Post extends Component<PostInterface> {
 
     loadingTime: any;
 

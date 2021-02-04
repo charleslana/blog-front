@@ -1,8 +1,8 @@
-import PostInterface from "./interfaces/PostInterface";
+import PostApiInterface from "./interfaces/PostApiInterface";
 import PostCategoryEnum from "./interfaces/enums/PostCategoryEnum";
 
 class Posts {
-    static items: PostInterface[] = [
+    static items: PostApiInterface[] = [
         {
             id: 1,
             title: 'Title 1 containing information from the initial title of the post',
