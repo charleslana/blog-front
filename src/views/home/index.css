@@ -90,6 +90,7 @@
 
 .category-javascript {
   background-color: #efd81d;
+  color: black;
 }
 
 .category-java {
@@ -104,6 +105,7 @@
 
 .category-vue {
   background-color: #3fb27f;
+  color: #33485c;
 }
 
 .category-others {
