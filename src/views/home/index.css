@@ -93,8 +93,9 @@
 }
 
 .category-java {
-  background-color: #e3e3e3;
-  color: black;
+  background-color: #fffeff;
+  color: #e63131;
+  border: 1px solid #0474c2;
 }
 
 .category-angular {
