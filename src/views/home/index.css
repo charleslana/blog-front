@@ -67,3 +67,36 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
+.category-linux {
+  background-color: #2a2a2a;
+}
+
+.category-react {
+  background-color: #5ed3f3;
+}
+
+.category-typescript {
+  background-color: #0076c6;
+}
+
+.category-javascript {
+  background-color: #efd81d;
+}
+
+.category-java {
+  background-color: #e3e3e3;
+  color: black;
+}
+
+.category-angular {
+  background-color: #d6002f;
+}
+
+.category-vue {
+  background-color: #3fb27f;
+}
+
+.category-others {
+  background-color: #2e4159;
+}
