@@ -4,6 +4,7 @@ import BgHome from '../../assets/layout/images/home.jpg';
 import Posts from "../../api/Posts";
 import Loading from "../../components/loading/Loading";
 import {Link} from 'react-router-dom';
+import Pagination from "../../components/pagination/Pagination";
 
 class Home extends Component {
 
@@ -33,22 +34,25 @@ class Home extends Component {
                     {this.state.loading ?
                         <Loading/>
                         :
-                        this.items.map(item =>
-                            <Link to={`/post/${item.id}`} key={item.id}>
-                                <div className={'home-content-separator'}>
-                                    <div
-                                        className={`home-content-post-card category-${item.category.toLowerCase()}`}>
-                                        {item.category}
+                        <div>
+                            {this.items.map(item =>
+                                <Link to={`/post/${item.id}`} key={item.id}>
+                                    <div className={'home-content-separator'}>
+                                        <div
+                                            className={`home-content-post-card category-${item.category.toLowerCase()}`}>
+                                            {item.category}
+                                        </div>
+                                        <div className={'home-content-post-title'}>
+                                            {item.title}
+                                        </div>
+                                        <div className={'home-content-post-description'}>
+                                            {item.description}
+                                        </div>
                                     </div>
-                                    <div className={'home-content-post-title'}>
-                                        {item.title}
-                                    </div>
-                                    <div className={'home-content-post-description'}>
-                                        {item.description}
-                                    </div>
-                                </div>
-                            </Link>
-                        )
+                                </Link>
+                            )}
+                            <Pagination/>
+                        </div>
                     }
                 </div>
             </div>
