@@ -5,19 +5,52 @@ import Posts from "../../api/Posts";
 import Loading from "../../components/loading/Loading";
 import {Link} from 'react-router-dom';
 import Pagination from "../../components/pagination/Pagination";
+import HomeInterface from "../interfaces/HomeInterface";
 
-class Home extends Component {
+class Home extends Component<HomeInterface> {
 
     items = Posts.items;
 
     loadingTime: any;
 
     state = {
-        loading: true
+        loading: true,
+        update: undefined,
+    }
+
+    convertToObject(url: any) {
+        const arr = url.slice(1).split(/[&=]/);
+        let params: any;
+        params = {};
+        for (let i = 0; i < arr.length; i += 2) {
+            const key = arr[i];
+            params[key] = arr[i + 1];
+        }
+        return params;
+    }
+
+    fetchPosts(page = 1) {
+        this.loadingTime = setTimeout(() => this.setState({loading: false}), 1000);
+    }
+
+    updateFetchPosts() {
+        const object = this.convertToObject(this.props.storage.location.search);
+
+        if (object.page !== undefined && object.page !== this.state.update) {
+            this.setState({
+                update: object.page,
+                loading: true
+            });
+            this.fetchPosts(object.page);
+        }
     }
 
     componentDidMount() {
-        this.loadingTime = setTimeout(() => this.setState({loading: false}), 1000);
+        this.fetchPosts();
+    }
+
+    componentDidUpdate() {
+        this.updateFetchPosts();
     }
 
     componentWillUnmount() {
@@ -51,7 +84,7 @@ class Home extends Component {
                                     </div>
                                 </Link>
                             )}
-                            <Pagination previous={null} page={1} next={null}/>
+                            <Pagination previous={1} page={2} next={3}/>
                         </div>
                     }
                 </div>

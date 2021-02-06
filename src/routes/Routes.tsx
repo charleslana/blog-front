@@ -16,7 +16,7 @@ class Routes extends Component {
                 <Switch>
                     <Route path={'/'} exact={true}
                            render={(props) =>
-                               (<Title text={'Home'}><Home/></Title>)}
+                               (<Title text={'Home'}><Home storage={props}/></Title>)}
                     />
                     <Route path={'/about'} exact={true}
                            render={(props) =>

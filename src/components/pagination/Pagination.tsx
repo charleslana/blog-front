@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import PaginationInterface from "../interfaces/PaginationInterface";
+import {Link} from 'react-router-dom';
 
 class Pagination extends Component<PaginationInterface> {
 
@@ -18,16 +19,26 @@ class Pagination extends Component<PaginationInterface> {
                         <p>Previous</p>
                     </div>
                     :
-                    <div className={'pagination-separator'}>
-                        <p>Previous</p>
-                    </div>
+                    <Link to={`/?page=${this.state.previous}&per_page=10`}>
+                        <div className={'pagination-separator'}>
+                            <p>Previous</p>
+                        </div>
+                    </Link>
                 }
                 <div className={'pagination-separator'}>
-                    <p>1</p>
+                    <p>{this.state.page}</p>
                 </div>
-                <div className={'pagination-separator'}>
-                    <p>Next</p>
-                </div>
+                {this.state.next == null ?
+                    <div className={'pagination-separator disabled'}>
+                        <p>Next</p>
+                    </div>
+                    :
+                    <Link to={`/?page=${this.state.next}&per_page=10`}>
+                        <div className={'pagination-separator'}>
+                            <p>Next</p>
+                        </div>
+                    </Link>
+                }
             </div>
         );
     }
