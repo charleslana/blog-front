@@ -51,7 +51,7 @@ class Home extends Component {
                                     </div>
                                 </Link>
                             )}
-                            <Pagination/>
+                            <Pagination previous={null} page={1} next={null}/>
                         </div>
                     }
                 </div>

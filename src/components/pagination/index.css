@@ -4,3 +4,19 @@
     text-align: center;
     margin-bottom: 5%;
 }
+
+.pagination-separator {
+    width: 33%;
+    float: left;
+}
+
+.pagination .pagination-separator p {
+    background-color: #cccccc;
+    display: inline;
+    padding: 5%;
+}
+
+.pagination .disabled p {
+    background-color: white;
+    color: white;
+}
