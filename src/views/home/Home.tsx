@@ -30,6 +30,9 @@ class Home extends Component<HomeInterface> {
     }
 
     fetchPosts(page = 1) {
+        if (page === 1) {
+            this.setState({update: 1});
+        }
         this.loadingTime = setTimeout(() => this.setState({loading: false}), 1000);
     }
 
