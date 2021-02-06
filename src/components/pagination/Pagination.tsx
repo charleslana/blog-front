@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 class Pagination extends Component<PaginationInterface> {
 
     state = {
+        link: this.props.link,
         previous: this.props.previous,
         page: this.props.page,
         next: this.props.next
@@ -19,7 +20,7 @@ class Pagination extends Component<PaginationInterface> {
                         <p>Previous</p>
                     </div>
                     :
-                    <Link to={`/?page=${this.state.previous}&per_page=10`}>
+                    <Link to={`${this.state.link}?page=${this.state.previous}&per_page=10`}>
                         <div className={'pagination-separator'}>
                             <p>Previous</p>
                         </div>
@@ -33,7 +34,7 @@ class Pagination extends Component<PaginationInterface> {
                         <p>Next</p>
                     </div>
                     :
-                    <Link to={`/?page=${this.state.next}&per_page=10`}>
+                    <Link to={`${this.state.link}?page=${this.state.next}&per_page=10`}>
                         <div className={'pagination-separator'}>
                             <p>Next</p>
                         </div>

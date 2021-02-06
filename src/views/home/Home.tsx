@@ -84,7 +84,7 @@ class Home extends Component<HomeInterface> {
                                     </div>
                                 </Link>
                             )}
-                            <Pagination previous={1} page={2} next={3}/>
+                            <Pagination link={'/'} previous={1} page={2} next={3}/>
                         </div>
                     }
                 </div>
