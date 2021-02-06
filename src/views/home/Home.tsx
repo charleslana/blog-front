@@ -36,7 +36,7 @@ class Home extends Component<HomeInterface> {
         this.loadingTime = setTimeout(() => this.setState({loading: false}), 1000);
     }
 
-    updateFetchPosts() {
+    updatePostsWithPagination() {
         const object = this.convertToObject(this.props.storage.location.search);
 
         if (object.page !== undefined && object.page !== this.state.update) {
@@ -53,7 +53,7 @@ class Home extends Component<HomeInterface> {
     }
 
     componentDidUpdate() {
-        this.updateFetchPosts();
+        this.updatePostsWithPagination();
     }
 
     componentWillUnmount() {
