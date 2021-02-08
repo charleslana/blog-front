@@ -32,7 +32,11 @@ class Post extends Component<PostInterface> {
                     {this.state.loading ?
                         <Loading/>
                         :
-                        <h1>Post title {this.props.storage.match.params.id}</h1>
+                        <div>
+                            <h1>Post title {this.props.storage.match.params.id}</h1>
+                            <p>Description</p>
+                            <p>Paragraph</p>
+                        </div>
                     }
                 </div>
             </div>
