@@ -21,3 +21,7 @@
     background-color: white;
     color: white;
 }
+
+.pagination .pagination-separator a {
+    text-decoration: none;
+}
