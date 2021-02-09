@@ -26,9 +26,15 @@ class Pagination extends Component<PaginationInterface> {
                             </div>
                             :
                             <div className={'pagination-separator'}>
-                                <Link to={`${this.state.link}?page=${this.state.previous}`}>
-                                    <p>Previous</p>
-                                </Link>
+                                {this.state.previous === 1 ?
+                                    <Link to={this.state.link}>
+                                        <p>Previous</p>
+                                    </Link>
+                                    :
+                                    <Link to={`${this.state.link}?page=${this.state.previous}`}>
+                                        <p>Previous</p>
+                                    </Link>
+                                }
                             </div>
                         }
                         <div className={'pagination-separator'}>
