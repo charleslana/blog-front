@@ -14,6 +14,7 @@ class Home extends Component<HomeInterface> {
         posts: [],
         prev_page: null,
         next_page: null,
+        from: null,
         loading: true,
         update: undefined,
     }
@@ -39,6 +40,7 @@ class Home extends Component<HomeInterface> {
                 posts: response.data.data,
                 prev_page: response.data.prev_page,
                 next_page: response.data.next_page,
+                from: response.data.from,
                 loading: false
             })
         }).catch((error) => {
@@ -59,7 +61,8 @@ class Home extends Component<HomeInterface> {
     }
 
     componentDidMount() {
-        this.fetchPosts();
+        const object = this.convertToObject(this.props.storage.location.search);
+        this.fetchPosts(object.page);
     }
 
     componentDidUpdate() {
@@ -95,7 +98,7 @@ class Home extends Component<HomeInterface> {
                                 </Link>
                             )}
                             <Pagination link={'/'} previous={this.state.prev_page} page={this.state.update}
-                                        next={this.state.next_page}/>
+                                        next={this.state.next_page} from={this.state.from}/>
                         </div>
                     }
                 </div>
