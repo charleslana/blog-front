@@ -20,7 +20,7 @@ class Pagination extends Component<PaginationInterface> {
                         <p>Previous</p>
                     </div>
                     :
-                    <Link to={`${this.state.link}?page=${this.state.previous}&per_page=10`}>
+                    <Link to={`${this.state.link}?page=${this.state.previous}`}>
                         <div className={'pagination-separator'}>
                             <p>Previous</p>
                         </div>
@@ -34,7 +34,7 @@ class Pagination extends Component<PaginationInterface> {
                         <p>Next</p>
                     </div>
                     :
-                    <Link to={`${this.state.link}?page=${this.state.next}&per_page=10`}>
+                    <Link to={`${this.state.link}?page=${this.state.next}`}>
                         <div className={'pagination-separator'}>
                             <p>Next</p>
                         </div>

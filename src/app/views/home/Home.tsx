@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import './index.css';
-import BgHome from '../../assets/layout/images/home.jpg';
-import Posts from "../../api/Posts";
+import BgHome from '../../../assets/layout/images/home.jpg';
 import Loading from "../../components/loading/Loading";
 import {Link} from 'react-router-dom';
 import Pagination from "../../components/pagination/Pagination";
 import HomeInterface from "../interfaces/HomeInterface";
+import api from "../../../service/api";
+import PostApiInterface from "../../../service/interfaces/PostApiInterface";
 
 class Home extends Component<HomeInterface> {
 
-    items = Posts.items;
-
-    loadingTime: any;
-
     state = {
+        posts: [],
+        prev_page: null,
+        next_page: null,
         loading: true,
         update: undefined,
     }
@@ -33,7 +33,17 @@ class Home extends Component<HomeInterface> {
         if (page === 1) {
             this.setState({update: 1});
         }
-        this.loadingTime = setTimeout(() => this.setState({loading: false}), 1000);
+
+        api.get(`posts?page=${page}`).then(response => {
+            this.setState({
+                posts: response.data.data,
+                prev_page: response.data.prev_page,
+                next_page: response.data.next_page,
+                loading: false
+            })
+        }).catch((error) => {
+
+        });
     }
 
     updatePostsWithPagination() {
@@ -56,11 +66,8 @@ class Home extends Component<HomeInterface> {
         this.updatePostsWithPagination();
     }
 
-    componentWillUnmount() {
-        clearTimeout(this.loadingTime);
-    }
-
     render() {
+        console.log(this.state.posts);
         return (
             <div>
                 <div className={'home-bg'} style={{backgroundImage: `url(${BgHome})`}}>
@@ -71,23 +78,24 @@ class Home extends Component<HomeInterface> {
                         <Loading/>
                         :
                         <div>
-                            {this.items.map(item =>
-                                <Link to={`/post/${item.id}`} key={item.id}>
+                            {this.state.posts.map((post: PostApiInterface) =>
+                                <Link to={`/post/${post.id}`} key={post.id}>
                                     <div className={'home-content-separator'}>
                                         <div
-                                            className={`home-content-post-card category-${item.category.toLowerCase()}`}>
-                                            {item.category}
+                                            className={`home-content-post-card category-${post.category.toLowerCase()}`}>
+                                            {post.category}
                                         </div>
                                         <div className={'home-content-post-title'}>
-                                            {item.title}
+                                            {post.title}
                                         </div>
                                         <div className={'home-content-post-description'}>
-                                            {item.description}
+                                            {post.description}
                                         </div>
                                     </div>
                                 </Link>
                             )}
-                            <Pagination link={'/'} previous={1} page={2} next={3}/>
+                            <Pagination link={'/'} previous={this.state.prev_page} page={this.state.update}
+                                        next={this.state.next_page}/>
                         </div>
                     }
                 </div>

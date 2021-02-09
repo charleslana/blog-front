@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import './index.css';
-import Logo from '../../assets/layout/images/logo.png';
+import Logo from '../../../assets/layout/images/logo.png';
 
 class Header extends Component {
 

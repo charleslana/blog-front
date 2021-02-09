@@ -1,5 +1,5 @@
-import PostApiInterface from "./interfaces/PostApiInterface";
-import PostCategoryEnum from "./interfaces/enums/PostCategoryEnum";
+import PostApiInterface from "../service/interfaces/PostApiInterface";
+import PostCategoryEnum from "../service/interfaces/enums/PostCategoryEnum";
 
 class Posts {
     static items: PostApiInterface[] = [

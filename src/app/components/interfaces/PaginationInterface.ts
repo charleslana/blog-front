@@ -1,6 +1,6 @@
 export default interface PaginationInterface {
     link: string,
     previous: number | null,
-    page: number,
+    page: number | undefined,
     next: number | null
 }
