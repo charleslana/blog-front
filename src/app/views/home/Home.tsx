@@ -45,7 +45,7 @@ class Home extends Component<HomeInterface> {
                 next_page: response.data.next_page,
                 from: response.data.from,
                 loading: false
-            })
+            });
         }).catch((error) => {
             if (error.response) {
                 return this.setState({
@@ -62,7 +62,22 @@ class Home extends Component<HomeInterface> {
         });
     }
 
-    updatePostsWithPagination() {
+    closeToast = () => {
+        this.setState({
+            open: false
+        });
+    }
+
+    componentDidMount() {
+        const object = this.convertToObject(this.props.storage.location.search);
+
+        this.setState({
+            update: object.page
+        });
+        this.fetchPosts(object.page);
+    }
+
+    componentDidUpdate() {
         const object = this.convertToObject(this.props.storage.location.search);
 
         if (object.page !== undefined && object.page !== this.state.update) {
@@ -72,21 +87,6 @@ class Home extends Component<HomeInterface> {
             });
             this.fetchPosts(object.page);
         }
-    }
-
-    closeToast = () => {
-        this.setState({
-            open: false
-        });
-    }
-
-    componentDidMount() {
-        const object = this.convertToObject(this.props.storage.location.search);
-        this.fetchPosts(object.page);
-    }
-
-    componentDidUpdate() {
-        this.updatePostsWithPagination();
     }
 
     render() {
