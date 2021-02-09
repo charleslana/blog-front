@@ -45,8 +45,6 @@
   align-items: center;
   display: flex;
   font-size: 35px;
-  box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
-  margin-bottom: 5%;
 }
 
 .home-content-post-title {
