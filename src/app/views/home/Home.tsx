@@ -7,6 +7,7 @@ import Pagination from "../../components/pagination/Pagination";
 import HomeInterface from "../interfaces/HomeInterface";
 import api from "../../../service/api";
 import PostApiInterface from "../../../service/interfaces/PostApiInterface";
+import Toast from "../../components/toast/Toast";
 
 class Home extends Component<HomeInterface> {
 
@@ -17,6 +18,8 @@ class Home extends Component<HomeInterface> {
         from: null,
         loading: true,
         update: undefined,
+        open: false,
+        toastMessage: null
     }
 
     convertToObject(url: any) {
@@ -44,7 +47,18 @@ class Home extends Component<HomeInterface> {
                 loading: false
             })
         }).catch((error) => {
+            if (error.response) {
+                return this.setState({
+                    toastMessage: error.response.statusText,
+                    open: true,
+                    loading: false
+                });
+            }
 
+            return this.setState({
+                toastMessage: 'An error has occurred.',
+                open: true,
+            });
         });
     }
 
@@ -60,6 +74,12 @@ class Home extends Component<HomeInterface> {
         }
     }
 
+    closeToast = () => {
+        this.setState({
+            open: false
+        });
+    }
+
     componentDidMount() {
         const object = this.convertToObject(this.props.storage.location.search);
         this.fetchPosts(object.page);
@@ -70,7 +90,6 @@ class Home extends Component<HomeInterface> {
     }
 
     render() {
-        console.log(this.state.posts);
         return (
             <div>
                 <div className={'home-bg'} style={{backgroundImage: `url(${BgHome})`}}>
@@ -102,6 +121,9 @@ class Home extends Component<HomeInterface> {
                         </div>
                     }
                 </div>
+                {this.state.open &&
+                <Toast text={this.state.toastMessage} type={'danger'} toastFunction={this.closeToast}/>
+                }
             </div>
         );
     }
