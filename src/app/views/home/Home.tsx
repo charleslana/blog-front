@@ -71,6 +71,10 @@ class Home extends Component<HomeInterface> {
     componentDidMount() {
         const object = this.convertToObject(this.props.storage.location.search);
 
+        if (object.page < 1) {
+            object.page = 1;
+        }
+
         this.setState({
             update: object.page
         });
@@ -79,6 +83,10 @@ class Home extends Component<HomeInterface> {
 
     componentDidUpdate() {
         const object = this.convertToObject(this.props.storage.location.search);
+
+        if (object.page < 1) {
+            object.page = 1;
+        }
 
         if (object.page !== undefined && object.page !== this.state.update) {
             this.setState({
