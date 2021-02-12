@@ -4,6 +4,7 @@ import PostInterface from "../interfaces/PostInterface";
 import Loading from "../../components/loading/Loading";
 import api from "../../../service/api";
 import Toast from "../../components/toast/Toast";
+import Title from "../../components/title/Title";
 
 class Post extends Component<PostInterface> {
 
@@ -11,7 +12,7 @@ class Post extends Component<PostInterface> {
 
     state = {
         category: null,
-        title: null,
+        title: '',
         description: null,
         userOwnerName: null,
         userOwnerAvatar: null,
@@ -56,12 +57,6 @@ class Post extends Component<PostInterface> {
         this.fetchPostId();
     }
 
-    componentDidUpdate() {
-        if (this.state.title != null) {
-            document.title = `${this.state.title} - CBlog`;
-        }
-    }
-
     render() {
         return (
             <div className={'content'}>
@@ -77,6 +72,9 @@ class Post extends Component<PostInterface> {
                 </div>
                 {this.state.open &&
                 <Toast text={this.state.toastMessage} type={'danger'} toastFunction={this.closeToast}/>
+                }
+                {this.state.title != null &&
+                <Title text={this.state.title} children={''}/>
                 }
             </div>
         );
