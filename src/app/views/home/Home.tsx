@@ -49,7 +49,7 @@ class Home extends Component<HomeInterface> {
         }).catch((error) => {
             if (error.response) {
                 return this.setState({
-                    toastMessage: error.response.statusText,
+                    toastMessage: error.response.data.message,
                     open: true,
                     loading: false
                 });
