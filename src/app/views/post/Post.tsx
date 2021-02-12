@@ -36,7 +36,8 @@ class Post extends Component<PostInterface> {
                 return this.setState({
                     toastMessage: error.response.data.message,
                     open: true,
-                    loading: false
+                    loading: false,
+                    title: null
                 });
             }
 
@@ -64,17 +65,16 @@ class Post extends Component<PostInterface> {
                     {this.state.loading ?
                         <Loading/>
                         :
+                        this.state.title != null &&
                         <div>
                             <h1>{this.state.title}</h1>
                             <p>{this.state.description}</p>
+                            <Title text={this.state.title} children={''}/>
                         </div>
                     }
                 </div>
                 {this.state.open &&
                 <Toast text={this.state.toastMessage} type={'danger'} toastFunction={this.closeToast}/>
-                }
-                {this.state.title != null &&
-                <Title text={this.state.title} children={''}/>
                 }
             </div>
         );
