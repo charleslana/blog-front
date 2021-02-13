@@ -5,13 +5,14 @@ import Loading from "../../components/loading/Loading";
 import api from "../../../service/api";
 import Toast from "../../components/toast/Toast";
 import Title from "../../components/title/Title";
+import '../home/index.css';
 
 class Post extends Component<PostInterface> {
 
     loadingTime: any;
 
     state = {
-        category: null,
+        category: '',
         title: '',
         description: null,
         userOwnerName: null,
@@ -59,6 +60,7 @@ class Post extends Component<PostInterface> {
     }
 
     render() {
+        const category = this.state.category;
         return (
             <div className={'content'}>
                 <div className={'post'}>
@@ -67,9 +69,14 @@ class Post extends Component<PostInterface> {
                         :
                         this.state.title != null &&
                         <div>
-                            <h1>{this.state.title}</h1>
-                            <p>{this.state.description}</p>
                             <Title text={this.state.title} children={''}/>
+                            <div className={`post-category category-${category.toLowerCase()}`}>
+                                {category}
+                            </div>
+                            <div className={'post-size'}>
+                                <h1>{this.state.title}</h1>
+                                <p>{this.state.description}</p>
+                            </div>
                         </div>
                     }
                 </div>

@@ -77,38 +77,38 @@
 }
 
 .category-linux {
-  background-color: #2a2a2a;
+  background-color: #2a2a2a !important;
 }
 
 .category-react {
-  background-color: #5ed3f3;
-  color: #267c94;
+  background-color: #5ed3f3 !important;
+  color: #267c94 !important;
 }
 
 .category-typescript {
-  background-color: #0076c6;
+  background-color: #0076c6 !important;
 }
 
 .category-javascript {
-  background-color: #efd81d;
-  color: black;
+  background-color: #efd81d !important;
+  color: black !important;
 }
 
 .category-java {
-  background-color: #fffeff;
-  color: #e63131;
-  border: 1px solid #0474c2;
+  background-color: #fffeff !important;
+  color: #e63131 !important;
+  border: 1px solid #0474c2 !important;
 }
 
 .category-angular {
-  background-color: #d6002f;
+  background-color: #d6002f !important;
 }
 
 .category-vue {
-  background-color: #3fb27f;
-  color: #33485c;
+  background-color: #3fb27f !important;
+  color: #33485c !important;
 }
 
 .category-others {
-  background-color: #2e4159;
+  background-color: #2e4159 !important;
 }
