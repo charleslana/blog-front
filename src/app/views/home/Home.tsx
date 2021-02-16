@@ -107,6 +107,7 @@ class Home extends Component<HomeInterface> {
                     {this.state.loading ?
                         <Loading/>
                         :
+                        this.state.posts.length ?
                         <div>
                             {this.state.posts.map((post: PostApiInterface) =>
                                 <Link to={`/post/${post.id}`} key={post.id}>
@@ -127,6 +128,8 @@ class Home extends Component<HomeInterface> {
                             <Pagination link={'/'} previous={this.state.prev_page} page={this.state.update}
                                         next={this.state.next_page} from={this.state.from}/>
                         </div>
+                            :
+                            <p>Posts not found.</p>
                     }
                 </div>
                 {this.state.open &&
