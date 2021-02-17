@@ -6,17 +6,16 @@ import api from "../../../service/api";
 import Toast from "../../components/toast/Toast";
 import Title from "../../components/title/Title";
 import '../home/index.css';
+import Avatar from '../../../assets/layout/images/avatar.png';
 
 class Post extends Component<PostInterface> {
-
-    loadingTime: any;
 
     state = {
         category: '',
         title: '',
         description: null,
         userOwnerName: null,
-        userOwnerAvatar: null,
+        userOwnerAvatar: undefined,
         open: false,
         toastMessage: null,
         loading: true
@@ -29,7 +28,7 @@ class Post extends Component<PostInterface> {
                 title: response.data.title,
                 description: response.data.description,
                 userOwnerName: response.data.user.name,
-                userOwnerAvatar: response.data.user.avatar,
+                userOwnerAvatar: response.data.user.avatar_url,
                 loading: false
             });
         }).catch((error) => {
@@ -76,6 +75,18 @@ class Post extends Component<PostInterface> {
                             <div className={'post-size'}>
                                 <h1>{this.state.title}</h1>
                                 <p>{this.state.description}</p>
+                                <h2>Author</h2>
+                                <div className={'author'}>
+                                    <div className={'author-a'}>
+                                        <img className={'author-avatar'}
+                                             src={this.state.userOwnerAvatar ? this.state.userOwnerAvatar : Avatar}
+                                             alt={'Avatar'}
+                                        />
+                                    </div>
+                                    <div className={'author-b'}>
+                                        {this.state.userOwnerName}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     }
