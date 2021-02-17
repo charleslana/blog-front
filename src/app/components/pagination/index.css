@@ -20,7 +20,7 @@
 .pagination .disabled p {
     background-color: white;
     color: white;
-    font-size: 0;
+    font-size: 1px;
 }
 
 .pagination .pagination-separator a {

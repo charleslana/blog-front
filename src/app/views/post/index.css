@@ -84,7 +84,7 @@
 .author-avatar {
     width: 100%;
     height: 100%;
-    border-radius: 100px;
+    border-radius: 101px;
     object-fit: contain;
     object-position: right;
 }
