@@ -87,6 +87,7 @@ class Post extends Component<PostInterface> {
                                         {this.state.userOwnerName}
                                     </div>
                                 </div>
+                                <h1>Comments</h1>
                             </div>
                         </div>
                     }
