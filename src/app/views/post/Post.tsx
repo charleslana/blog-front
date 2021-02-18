@@ -18,7 +18,11 @@ class Post extends Component<PostInterface> {
         userOwnerAvatar: undefined,
         open: false,
         toastMessage: null,
-        loading: true
+        loading: true,
+        comments: [],
+        prev_page: null,
+        next_page: null,
+        from: null,
     }
 
     fetchPostId() {
@@ -28,9 +32,9 @@ class Post extends Component<PostInterface> {
                 title: response.data.title,
                 description: response.data.description,
                 userOwnerName: response.data.user.name,
-                userOwnerAvatar: response.data.user.avatar_url,
-                loading: false
+                userOwnerAvatar: response.data.user.avatar_url
             });
+            this.fetchCommentsByPostId();
         }).catch((error) => {
             if (error.response) {
                 return this.setState({
@@ -38,6 +42,31 @@ class Post extends Component<PostInterface> {
                     open: true,
                     loading: false,
                     title: null
+                });
+            }
+
+            return this.setState({
+                toastMessage: 'An error has occurred.',
+                open: true,
+            });
+        });
+    }
+
+    fetchCommentsByPostId() {
+        api.get(`comments/post/${this.props.storage.match.params.id}`).then(response => {
+            this.setState({
+                comments: response.data.data,
+                prev_page: response.data.prev_page,
+                next_page: response.data.next_page,
+                from: response.data.from,
+                loading: false
+            });
+        }).catch((error) => {
+            if (error.response) {
+                return this.setState({
+                    toastMessage: error.response.data.message,
+                    open: true,
+                    loading: false
                 });
             }
 
@@ -80,7 +109,7 @@ class Post extends Component<PostInterface> {
                                     <div className={'author-a'}>
                                         <img className={'author-avatar'}
                                              src={this.state.userOwnerAvatar ? this.state.userOwnerAvatar : Avatar}
-                                             alt={'Avatar'}
+                                             alt={'Author Avatar'}
                                         />
                                     </div>
                                     <div className={'author-b'}>
@@ -88,6 +117,19 @@ class Post extends Component<PostInterface> {
                                     </div>
                                 </div>
                                 <h1>Comments</h1>
+                                {this.state.comments.length ?
+                                    <div className={'comments'}>
+                                        <div className={'comments-a'}>
+                                            <img className={'comments-avatar'} src={Avatar} alt={'Comment Avatar'}/>
+                                            <h5>Name Comment</h5>
+                                        </div>
+                                        <div className={'comments-b'}>
+                                            <p>Message</p>
+                                        </div>
+                                    </div>
+                                    :
+                                    <span>No comment.</span>
+                                }
                             </div>
                         </div>
                     }

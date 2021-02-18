@@ -108,26 +108,26 @@ class Home extends Component<HomeInterface> {
                         <Loading/>
                         :
                         this.state.posts.length ?
-                        <div>
-                            {this.state.posts.map((post: PostApiInterface) =>
-                                <Link to={`/post/${post.id}`} key={post.id}>
-                                    <div className={'home-content-separator'}>
-                                        <div
-                                            className={`home-content-post-card category-${post.category.toLowerCase()}`}>
-                                            {post.category}
+                            <div>
+                                {this.state.posts.map((post: PostApiInterface) =>
+                                    <Link to={`/post/${post.id}`} key={post.id}>
+                                        <div className={'home-content-separator'}>
+                                            <div
+                                                className={`home-content-post-card category-${post.category.toLowerCase()}`}>
+                                                {post.category}
+                                            </div>
+                                            <div className={'home-content-post-title'}>
+                                                {post.title}
+                                            </div>
+                                            <div className={'home-content-post-description'}>
+                                                {post.description}
+                                            </div>
                                         </div>
-                                        <div className={'home-content-post-title'}>
-                                            {post.title}
-                                        </div>
-                                        <div className={'home-content-post-description'}>
-                                            {post.description}
-                                        </div>
-                                    </div>
-                                </Link>
-                            )}
-                            <Pagination link={'/'} previous={this.state.prev_page} page={this.state.update}
-                                        next={this.state.next_page} from={this.state.from}/>
-                        </div>
+                                    </Link>
+                                )}
+                                <Pagination link={'/'} previous={this.state.prev_page} page={this.state.update}
+                                            next={this.state.next_page} from={this.state.from}/>
+                            </div>
                             :
                             <p>Posts not found.</p>
                     }
