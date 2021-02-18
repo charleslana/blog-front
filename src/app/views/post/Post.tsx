@@ -7,6 +7,7 @@ import Toast from "../../components/toast/Toast";
 import Title from "../../components/title/Title";
 import '../home/index.css';
 import Avatar from '../../../assets/layout/images/avatar.png';
+import CommentsApiInterface from "../../../service/interfaces/enums/CommentsApiInterface";
 
 class Post extends Component<PostInterface> {
 
@@ -118,15 +119,19 @@ class Post extends Component<PostInterface> {
                                 </div>
                                 <h1>Comments</h1>
                                 {this.state.comments.length ?
-                                    <div className={'comments'}>
-                                        <div className={'comments-a'}>
-                                            <img className={'comments-avatar'} src={Avatar} alt={'Comment Avatar'}/>
-                                            <h5>Name Comment</h5>
+                                    this.state.comments.map((post: CommentsApiInterface) =>
+                                        <div className={'comments'} key={post.id}>
+                                            <div className={'comments-a'}>
+                                                <img className={'comments-avatar'}
+                                                     src={post.user.avatar_url ? post.user.avatar_url : Avatar}
+                                                     alt={'Comment Avatar'}/>
+                                                <h5>{post.user.name}</h5>
+                                            </div>
+                                            <div className={'comments-b'}>
+                                                <p>{post.message}</p>
+                                            </div>
                                         </div>
-                                        <div className={'comments-b'}>
-                                            <p>Message</p>
-                                        </div>
-                                    </div>
+                                    )
                                     :
                                     <span>No comment.</span>
                                 }
