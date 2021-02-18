@@ -8,6 +8,7 @@ import Title from "../../components/title/Title";
 import '../home/index.css';
 import Avatar from '../../../assets/layout/images/avatar.png';
 import CommentsApiInterface from "../../../service/interfaces/CommentsApiInterface";
+import PostCommentEnum from "../../../service/interfaces/enums/PostCommentEnum";
 
 class Post extends Component<PostInterface> {
 
@@ -24,7 +25,7 @@ class Post extends Component<PostInterface> {
         prev_page: null,
         next_page: null,
         from: null,
-        comment: null
+        comment: PostCommentEnum.NO
     }
 
     fetchPostId() {
@@ -120,22 +121,25 @@ class Post extends Component<PostInterface> {
                                     </div>
                                 </div>
                                 <h1>Comments</h1>
-                                {this.state.comments.length ?
-                                    this.state.comments.map((post: CommentsApiInterface) =>
-                                        <div className={'comments'} key={post.id}>
-                                            <div className={'comments-a'}>
-                                                <img className={'comments-avatar'}
-                                                     src={post.user.avatar_url ? post.user.avatar_url : Avatar}
-                                                     alt={'Comment Avatar'}/>
-                                                <h5>{post.user.name}</h5>
+                                {this.state.comment === PostCommentEnum.YES ?
+                                    this.state.comments.length ?
+                                        this.state.comments.map((post: CommentsApiInterface) =>
+                                            <div className={'comments'} key={post.id}>
+                                                <div className={'comments-a'}>
+                                                    <img className={'comments-avatar'}
+                                                         src={post.user.avatar_url ? post.user.avatar_url : Avatar}
+                                                         alt={'Comment Avatar'}/>
+                                                    <h5>{post.user.name}</h5>
+                                                </div>
+                                                <div className={'comments-b'}>
+                                                    <p>{post.message}</p>
+                                                </div>
                                             </div>
-                                            <div className={'comments-b'}>
-                                                <p>{post.message}</p>
-                                            </div>
-                                        </div>
-                                    )
+                                        )
+                                        :
+                                        <span>No comment.</span>
                                     :
-                                    <span>No comment.</span>
+                                    <span>Comments are disabled.</span>
                                 }
                             </div>
                         </div>
