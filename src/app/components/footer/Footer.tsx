@@ -5,13 +5,14 @@ import Logo from '../../../assets/layout/images/logo.png';
 class Footer extends Component {
 
     render() {
+        const date = new Date();
         return (
             <footer>
                 <div className={'footer-black'}>
                     <div className={'footer-a'}>
                         <ul>
                             <li>CBlog by Charles</li>
-                            <li>Copyright 2021</li>
+                            <li>Copyright {date.getFullYear()}</li>
                             <li>Brazil</li>
                         </ul>
                     </div>
