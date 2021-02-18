@@ -7,7 +7,7 @@ import Toast from "../../components/toast/Toast";
 import Title from "../../components/title/Title";
 import '../home/index.css';
 import Avatar from '../../../assets/layout/images/avatar.png';
-import CommentsApiInterface from "../../../service/interfaces/enums/CommentsApiInterface";
+import CommentsApiInterface from "../../../service/interfaces/CommentsApiInterface";
 
 class Post extends Component<PostInterface> {
 
@@ -24,6 +24,7 @@ class Post extends Component<PostInterface> {
         prev_page: null,
         next_page: null,
         from: null,
+        comment: null
     }
 
     fetchPostId() {
@@ -33,7 +34,8 @@ class Post extends Component<PostInterface> {
                 title: response.data.title,
                 description: response.data.description,
                 userOwnerName: response.data.user.name,
-                userOwnerAvatar: response.data.user.avatar_url
+                userOwnerAvatar: response.data.user.avatar_url,
+                comment: response.data.comments
             });
             this.fetchCommentsByPostId();
         }).catch((error) => {
