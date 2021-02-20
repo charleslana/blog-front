@@ -1,20 +1,38 @@
 import React, {Component} from 'react';
 import './index.css';
 import Loading from "../../components/loading/Loading";
+import Modal from "../../components/modal/Modal";
+import {Redirect} from 'react-router';
 
 class Register extends Component {
 
     state = {
-        loading: false
+        loading: false,
+        success: false,
+        redirect: false
     }
 
     handleSubmit() {
-        this.setState({loading: true});
+        this.setState({
+            loading: true,
+            success: true
+        });
+    }
+
+    closeModal = () => {
+        this.setState({success: false});
+    }
+
+    redirectPage = () => {
+        this.setState({redirect: true});
     }
 
     render() {
         return (
             <div className={'content'}>
+                {this.state.redirect &&
+                <Redirect to={'/login'}/>
+                }
                 <div className={'register'}>
                     <h1>Register</h1>
                     <p>Register an account to participate in the blog</p>
@@ -37,6 +55,12 @@ class Register extends Component {
                             <button type={'button'} onClick={() => this.handleSubmit()}>Register</button>
                         }
                     </label>
+                    {this.state.success &&
+                    <Modal message={'Your account has been successfully created.'}
+                           buttonMessage={'Redirect to Login'}
+                           function={this.redirectPage}
+                    />
+                    }
                 </div>
             </div>
         );
