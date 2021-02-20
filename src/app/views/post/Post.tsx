@@ -9,6 +9,7 @@ import '../home/index.css';
 import Avatar from '../../../assets/layout/images/avatar.png';
 import CommentsApiInterface from "../../../service/interfaces/CommentsApiInterface";
 import PostCommentEnum from "../../../service/interfaces/enums/PostCommentEnum";
+import LoadMore from "../../components/load-more/LoadMore";
 
 class Post extends Component<PostInterface> {
 
@@ -22,10 +23,8 @@ class Post extends Component<PostInterface> {
         toastMessage: null,
         loading: true,
         comments: [],
-        prev_page: null,
         next_page: null,
-        from: null,
-        comment: PostCommentEnum.NO
+        comment: PostCommentEnum.NO,
     }
 
     fetchPostId() {
@@ -38,7 +37,7 @@ class Post extends Component<PostInterface> {
                 userOwnerAvatar: response.data.user.avatar_url,
                 comment: response.data.comments
             });
-            this.fetchCommentsByPostId();
+            this.fetchCommentsByPostId(1);
         }).catch((error) => {
             if (error.response) {
                 return this.setState({
@@ -56,13 +55,11 @@ class Post extends Component<PostInterface> {
         });
     }
 
-    fetchCommentsByPostId() {
-        api.get(`comments/post/${this.props.storage.match.params.id}`).then(response => {
+    fetchCommentsByPostId(page: number | null) {
+        api.get(`comments/post/${this.props.storage.match.params.id}?page=${page}`).then(response => {
             this.setState({
-                comments: response.data.data,
-                prev_page: response.data.prev_page,
+                comments: [...this.state.comments, ...response.data.data],
                 next_page: response.data.next_page,
-                from: response.data.from,
                 loading: false
             });
         }).catch((error) => {
@@ -79,6 +76,10 @@ class Post extends Component<PostInterface> {
                 open: true,
             });
         });
+    }
+
+    loadComments = () => {
+        this.fetchCommentsByPostId(this.state.next_page);
     }
 
     closeToast = () => {
@@ -123,19 +124,23 @@ class Post extends Component<PostInterface> {
                                 <h1>Comments</h1>
                                 {this.state.comment === PostCommentEnum.YES ?
                                     this.state.comments.length ?
-                                        this.state.comments.map((post: CommentsApiInterface) =>
-                                            <div className={'comments'} key={post.id}>
-                                                <div className={'comments-a'}>
-                                                    <img className={'comments-avatar'}
-                                                         src={post.user.avatar_url ? post.user.avatar_url : Avatar}
-                                                         alt={'Comment Avatar'}/>
-                                                    <h5>{post.user.name}</h5>
+                                        <div>
+                                            {this.state.comments.map((post: CommentsApiInterface) =>
+                                                <div className={'comments'} key={post.id}>
+                                                    <div className={'comments-a'}>
+                                                        <img className={'comments-avatar'}
+                                                             src={post.user.avatar_url ? post.user.avatar_url : Avatar}
+                                                             alt={'Comment Avatar'}/>
+                                                        <h5>{post.user.name}</h5>
+                                                    </div>
+                                                    <div className={'comments-b'}>
+                                                        <p>{post.message}</p>
+                                                    </div>
                                                 </div>
-                                                <div className={'comments-b'}>
-                                                    <p>{post.message}</p>
-                                                </div>
-                                            </div>
-                                        )
+                                            )}
+                                            <LoadMore text={'Comments'} next={this.state.next_page}
+                                                      function={this.loadComments}/>
+                                        </div>
                                         :
                                         <span>No comment.</span>
                                     :
