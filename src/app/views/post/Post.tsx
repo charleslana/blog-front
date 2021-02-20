@@ -25,6 +25,7 @@ class Post extends Component<PostInterface> {
         comments: [],
         next_page: null,
         comment: PostCommentEnum.NO,
+        loadingComments: true
     }
 
     fetchPostId() {
@@ -60,7 +61,8 @@ class Post extends Component<PostInterface> {
             this.setState({
                 comments: [...this.state.comments, ...response.data.data],
                 next_page: response.data.next_page,
-                loading: false
+                loading: false,
+                loadingComments: false
             });
         }).catch((error) => {
             if (error.response) {
@@ -79,6 +81,7 @@ class Post extends Component<PostInterface> {
     }
 
     loadComments = () => {
+        this.setState({loadingComments: true});
         this.fetchCommentsByPostId(this.state.next_page);
     }
 
@@ -139,7 +142,7 @@ class Post extends Component<PostInterface> {
                                                 </div>
                                             )}
                                             <LoadMore text={'Comments'} next={this.state.next_page}
-                                                      function={this.loadComments}/>
+                                                      function={this.loadComments} loading={this.state.loadingComments}/>
                                         </div>
                                         :
                                         <span>No comment.</span>

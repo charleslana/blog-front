@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import LoadMoreInterface from "../interfaces/LoadMoreInterface";
+import Loading from "../loading/Loading";
 
 class LoadMore extends Component<LoadMoreInterface> {
 
@@ -12,7 +13,13 @@ class LoadMore extends Component<LoadMoreInterface> {
         return (
             <div className={'load-more'}>
                 {this.props.next &&
-                    <button type={'button'} onClick={this.loadFunction}>Load more {this.props.text}</button>
+                <>
+                    {this.props.loading ?
+                        <button type={'button'} disabled={true}><Loading/>Load more {this.props.text}</button>
+                        :
+                        <button type={'button'} onClick={this.loadFunction}>Load more {this.props.text}</button>
+                    }
+                </>
                 }
             </div>
         );
