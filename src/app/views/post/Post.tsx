@@ -142,7 +142,8 @@ class Post extends Component<PostInterface> {
                                                 </div>
                                             )}
                                             <LoadMore text={'Comments'} next={this.state.next_page}
-                                                      function={this.loadComments} loading={this.state.loadingComments}/>
+                                                      function={this.loadComments}
+                                                      loading={this.state.loadingComments}/>
                                         </div>
                                         :
                                         <span>No comment.</span>
