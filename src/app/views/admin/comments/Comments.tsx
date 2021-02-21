@@ -3,6 +3,7 @@ import './index.css';
 import api from "../../../../service/api";
 import {Redirect} from "react-router";
 import Loading from "../../../components/loading/Loading";
+import Toast from "../../../components/toast/Toast";
 
 class Comments extends Component {
 
@@ -32,6 +33,12 @@ class Comments extends Component {
         });
     }
 
+    closeToast = () => {
+        this.setState({
+            open: false
+        });
+    }
+
     componentDidMount() {
         this.fetchComments();
     }
@@ -49,6 +56,9 @@ class Comments extends Component {
                         <h1>Comments</h1>
                     }
                 </div>
+                {this.state.open &&
+                <Toast text={this.state.toastMessage} type={'danger'} toastFunction={this.closeToast}/>
+                }
             </div>
         );
     }

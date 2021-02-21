@@ -4,11 +4,19 @@ import './index.css';
 import Logo from '../../../assets/layout/images/logo.png';
 import jwt_decode from 'jwt-decode';
 import TokenInterface from "../interfaces/TokenInterface";
+import api from "../../../service/api";
+import Toast from "../toast/Toast";
 
 class Header extends Component {
 
     state = {
-        token: null
+        open: false,
+        toastMessage: null,
+        token: null,
+        name: null,
+        email: null,
+        avatar: null,
+        role: null
     }
 
     componentDidMount() {
@@ -29,12 +37,35 @@ class Header extends Component {
         }
     }
 
+    fetchProfile() {
+        if (this.state.token) {
+            api.get('/users/profile').then(response => {
+                this.setState({});
+            }).catch((error) => {
+                if (error.response) {
+                    return this.setState({});
+                }
+
+                return this.setState({
+                    toastMessage: 'An error has occurred.',
+                    open: true,
+                });
+            });
+        }
+    }
+
     updateToken() {
         this.setState({token: localStorage.getItem('token')});
     }
 
     logout() {
         localStorage.removeItem('token');
+    }
+
+    closeToast = () => {
+        this.setState({
+            open: false
+        });
     }
 
     render() {
@@ -50,17 +81,22 @@ class Header extends Component {
                             <li><Link to={'/'} className={'navBar'}>Home</Link></li>
                             <li><Link to={'/about'} className={'navBar'}>About</Link></li>
                             {this.state.token ?
-                                <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
+                                <>
+                                    <li><Link to={'/admin/comments'} className={'navBar'}>Comments</Link></li>
+                                    <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
+                                </>
                                 :
                                 <>
                                     <li><Link to={'/login'} className={'navBar'}>Login</Link></li>
                                     <li><Link to={'/register'} className={'navBar'}>Register</Link></li>
                                 </>
                             }
-                            <li><Link to={'/admin/comments'} className={'navBar'}>Comments</Link></li>
                         </ul>
                     </div>
                 </div>
+                {this.state.open &&
+                <Toast text={this.state.toastMessage} type={'danger'} toastFunction={this.closeToast}/>
+                }
             </header>
         );
     }
