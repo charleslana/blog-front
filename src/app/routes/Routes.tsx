@@ -8,6 +8,7 @@ import ScrollToTop from "../components/scroll/ScrollToTop";
 import Title from "../components/title/Title";
 import Post from "../views/post/Post";
 import Comments from "../views/admin/comments/Comments";
+import Header from "../components/header/Header";
 
 class Routes extends Component {
 
@@ -17,27 +18,27 @@ class Routes extends Component {
                 <Switch>
                     <Route path={'/'} exact={true}
                            render={(props) =>
-                               (<Title text={'Home'}><Home storage={props}/></Title>)}
+                               (<Title text={'Home'}><Header/><Home storage={props}/></Title>)}
                     />
                     <Route path={'/about'} exact={true}
                            render={(props) =>
-                               (<Title text={'About'}><About/></Title>)}
+                               (<Title text={'About'}><Header/><About/></Title>)}
                     />
                     <Route path={'/login'} exact={true}
                            render={(props) =>
-                               (<Title text={'Login'}><Login/></Title>)}
+                               (<Title text={'Login'}><Header/><Login/></Title>)}
                     />
                     <Route path={'/register'} exact={true}
                            render={(props) =>
-                               (<Title text={'Register'}><Register/></Title>)}
+                               (<Title text={'Register'}><Header/><Register/></Title>)}
                     />
                     <Route path={'/post/:id'} exact={true}
                            render={(props) =>
-                               (<Title text={'Post'}><Post storage={props}/></Title>)}
+                               (<Title text={'Post'}><Header/><Post storage={props}/></Title>)}
                     />
                     <Route path={'/admin/comments'} exact={true}
                            render={(props) =>
-                               (<Title text={'Comments'}><Comments/></Title>)}
+                               (<Title text={'Comments'}><Header/><Comments/></Title>)}
                     />
                 </Switch>
             </ScrollToTop>
