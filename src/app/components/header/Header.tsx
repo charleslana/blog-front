@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import './index.css';
 import Logo from '../../../assets/layout/images/logo.png';
+import jwt_decode from 'jwt-decode';
+import TokenInterface from "../interfaces/TokenInterface";
 
 class Header extends Component {
 
@@ -14,7 +16,14 @@ class Header extends Component {
     }
 
     componentDidUpdate() {
-        const token = localStorage.getItem('token');
+        let token = localStorage.getItem('token');
+        if (token) {
+            const {exp} = jwt_decode(token as string) as TokenInterface;
+            if (Date.now() > (exp * 1000)) {
+                localStorage.removeItem('token');
+                token = null;
+            }
+        }
         if (this.state.token !== token) {
             this.updateToken();
         }
