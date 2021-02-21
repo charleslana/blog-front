@@ -19,6 +19,7 @@ class Header extends Component {
                             <li><Link to={'/about'} className={'navBar'}>About</Link></li>
                             <li><Link to={'/login'} className={'navBar'}>Login</Link></li>
                             <li><Link to={'/register'} className={'navBar'}>Register</Link></li>
+                            <li><Link to={'/admin/comments'} className={'navBar'}>Comments</Link></li>
                         </ul>
                     </div>
                 </div>

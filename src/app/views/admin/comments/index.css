@@ -1,0 +1,15 @@
+.admin-comments {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.admin-comments h1 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.admin-comments p {
+    padding: 2%;
+    text-align: justify;
+    font-size: 18px;
+}

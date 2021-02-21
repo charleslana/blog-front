@@ -7,6 +7,7 @@ import Register from "../views/register/Register";
 import ScrollToTop from "../components/scroll/ScrollToTop";
 import Title from "../components/title/Title";
 import Post from "../views/post/Post";
+import Comments from "../views/admin/comments/Comments";
 
 class Routes extends Component {
 
@@ -33,6 +34,10 @@ class Routes extends Component {
                     <Route path={'/post/:id'} exact={true}
                            render={(props) =>
                                (<Title text={'Post'}><Post storage={props}/></Title>)}
+                    />
+                    <Route path={'/admin/comments'} exact={true}
+                           render={(props) =>
+                               (<Title text={'Comments'}><Comments/></Title>)}
                     />
                 </Switch>
             </ScrollToTop>
