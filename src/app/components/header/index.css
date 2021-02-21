@@ -72,3 +72,11 @@ header {
   line-height: 94%;
   margin-left: -25%;
 }
+
+.header-b ul li img {
+  width: auto;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 40px;
+  vertical-align: middle;
+}

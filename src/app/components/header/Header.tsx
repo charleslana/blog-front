@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode';
 import TokenInterface from "../interfaces/TokenInterface";
 import api from "../../../service/api";
 import Toast from "../toast/Toast";
+import Avatar from '../../../assets/layout/images/avatar.png';
 
 class Header extends Component {
 
@@ -89,6 +90,7 @@ class Header extends Component {
                                 <>
                                     <li><Link to={'/admin/comments'} className={'navBar'}>Comments</Link></li>
                                     <li className={'separator'}>{this.state.name}</li>
+                                    <li><img src={this.state.avatar ? this.state.avatar : Avatar} alt={'Avatar'}/></li>
                                     <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
                                 </>
                                 :

@@ -76,6 +76,7 @@
     height: 100%;
     float: left;
     display: flex;
+    justify-content: flex-end;
 }
 
 .author-b {
@@ -90,7 +91,7 @@
 }
 
 .author-avatar {
-    width: 100%;
+    width: auto;
     height: 100%;
     border-radius: 100px;
     object-fit: contain;
@@ -107,6 +108,8 @@
 .comments-a {
     width: 25%;
     float: left;
+    justify-content: center;
+    display: grid;
 }
 
 .comments-b {
@@ -115,16 +118,15 @@
 }
 
 .comments-avatar {
-    width: 100%;
+    width: auto;
     height: 50px;
     border-radius: 50px;
-    object-fit: contain;
-    object-position: center;
 }
 
 .comments-a h5 {
     text-align: center;
     font-size: 14px;
+    padding-top: 5%;
 }
 
 .comments-b p {
