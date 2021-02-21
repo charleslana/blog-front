@@ -21,6 +21,7 @@ class Header extends Component {
 
     componentDidMount() {
         this.updateToken();
+        this.fetchProfile();
     }
 
     componentDidUpdate() {
@@ -34,13 +35,17 @@ class Header extends Component {
         }
         if (this.state.token !== token) {
             this.updateToken();
+            this.fetchProfile();
         }
     }
 
     fetchProfile() {
-        if (this.state.token) {
+        const token = localStorage.getItem('token');
+        if (token) {
             api.get('/users/profile').then(response => {
-                this.setState({});
+                this.setState({
+                    name: response.data.name
+                });
             }).catch((error) => {
                 if (error.response) {
                     return this.setState({});
@@ -83,6 +88,7 @@ class Header extends Component {
                             {this.state.token ?
                                 <>
                                     <li><Link to={'/admin/comments'} className={'navBar'}>Comments</Link></li>
+                                    <li className={'separator'}>{this.state.name}</li>
                                     <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
                                 </>
                                 :
