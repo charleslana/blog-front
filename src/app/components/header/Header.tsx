@@ -15,7 +15,7 @@ class Header extends Component {
         token: null,
         name: null,
         email: null,
-        avatar: null,
+        avatar: undefined,
         role: null
     }
 
