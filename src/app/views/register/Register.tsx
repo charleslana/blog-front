@@ -3,10 +3,14 @@ import './index.css';
 import Loading from "../../components/loading/Loading";
 import Modal from "../../components/modal/Modal";
 import {Redirect} from 'react-router';
+import api from "../../../service/api";
+import Toast from "../../components/toast/Toast";
 
 class Register extends Component {
 
     state = {
+        toastMessage: null,
+        open: false,
         loading: false,
         success: false,
         redirect: false,
@@ -31,13 +35,48 @@ class Register extends Component {
 
     handleSubmit = () => {
         this.setState({
-            loading: true,
-            success: true
+            loading: true
+        });
+
+        api.post('users/details', this.state.formData).then(response => {
+            this.setState({
+                success: true
+            });
+        }).catch((error) => {
+            if (error.response) {
+
+                if(error.response.data.error === 'Bad Request') {
+                    return this.setState({
+                        toastMessage: error.response.data.validation.body.message,
+                        open: true,
+                        loading: false
+                    });
+                }
+
+                if(error.response.data.status === 'error') {
+                    return this.setState({
+                        toastMessage: error.response.data.message,
+                        open: true,
+                        loading: false
+                    });
+                }
+            }
+
+            return this.setState({
+                toastMessage: 'An error has occurred.',
+                open: true,
+            });
         });
     }
 
     closeModal = () => {
         this.setState({success: false});
+    }
+
+    closeToast = () => {
+        this.setState({
+            open: false
+        });
     }
 
     redirectPage = () => {
@@ -81,7 +120,7 @@ class Register extends Component {
                         <input type={'password'} name={'confirmPassword'} placeholder={'Confirm your password'}
                                onChange={this.handleInputChange}/>
                     </label>
-                    <label>
+                    <div>
                         {this.state.loading ?
                             <button type={'button'} disabled={true}><Loading/>Register</button>
                             :
@@ -90,7 +129,7 @@ class Register extends Component {
                                 :
                                 <button type={'button'} disabled={true}>Register</button>
                         }
-                    </label>
+                    </div>
                     {this.state.success &&
                     <Modal message={'Your account has been successfully created.'}
                            buttonMessage={'Redirect to Login'}
@@ -98,6 +137,9 @@ class Register extends Component {
                     />
                     }
                 </div>
+                {this.state.open &&
+                <Toast text={this.state.toastMessage} type={'danger'} toastFunction={this.closeToast}/>
+                }
             </div>
         );
     }

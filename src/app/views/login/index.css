@@ -31,7 +31,13 @@
     margin-bottom: 15px;
 }
 
-.login label button {
+.login div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login div button {
     background-color: #2e6eac;
     color: white;
     width: auto;
@@ -39,13 +45,10 @@
     border-radius: 0;
     outline: none;
     font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
 }
 
-.login label button .loader {
+.login div button .loader {
     margin: 0 10px;
     width: 50px;
     height: 50px;
