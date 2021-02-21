@@ -31,13 +31,13 @@
     margin-bottom: 15px;
 }
 
-.register div {
+.register span {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.register div button {
+.register span button {
     background-color: #2e6eac;
     color: white;
     width: auto;
@@ -48,7 +48,7 @@
     cursor: pointer;
 }
 
-.register div button .loader {
+.register span button .loader {
     margin: 0 10px;
     width: 50px;
     height: 50px;

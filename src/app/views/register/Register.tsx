@@ -120,7 +120,7 @@ class Register extends Component {
                         <input type={'password'} name={'confirmPassword'} placeholder={'Confirm your password'}
                                onChange={this.handleInputChange}/>
                     </label>
-                    <div>
+                    <span>
                         {this.state.loading ?
                             <button type={'button'} disabled={true}><Loading/>Register</button>
                             :
@@ -129,7 +129,7 @@ class Register extends Component {
                                 :
                                 <button type={'button'} disabled={true}>Register</button>
                         }
-                    </div>
+                    </span>
                     {this.state.success &&
                     <Modal message={'Your account has been successfully created.'}
                            buttonMessage={'Redirect to Login'}

@@ -74,7 +74,7 @@ class Login extends Component {
                         <input type={'password'} name={'password'} placeholder={'Inform your password'}
                                onChange={this.handleInputChange}/>
                     </label>
-                    <div>
+                    <span>
                         {this.state.loading ?
                             <button type={'button'} disabled={true}><Loading/>Login</button>
                             :
@@ -83,7 +83,7 @@ class Login extends Component {
                                 :
                                 <button type={'button'} disabled={true}>Login</button>
                         }
-                    </div>
+                    </span>
                 </div>
                 {this.state.open &&
                 <Toast text={this.state.toastMessage} type={this.state.toastType} toastFunction={this.closeToast}/>
