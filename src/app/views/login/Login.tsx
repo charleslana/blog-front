@@ -16,7 +16,8 @@ class Login extends Component {
             password: ''
         },
         checkFormData: false,
-        redirect: false
+        redirect: false,
+        token: ''
     }
 
     openToast() {
@@ -51,9 +52,9 @@ class Login extends Component {
 
         api.post('users/session', this.state.formData).then(response => {
             this.setState({
-                redirect: true
+                redirect: true,
+                token: response.data.token
             });
-            localStorage.setItem('token', response.data.token);
         }).catch((error) => {
             if (error.response) {
 
@@ -90,6 +91,9 @@ class Login extends Component {
         }
         if (this.state.checkFormData !== check) {
             this.setState({checkFormData: check});
+        }
+        if (this.state.token !== '') {
+            localStorage.setItem('token', this.state.token);
         }
     }
 
