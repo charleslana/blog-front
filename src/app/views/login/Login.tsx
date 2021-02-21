@@ -2,19 +2,21 @@ import React, {ChangeEvent, Component} from 'react';
 import './index.css';
 import Toast from "../../components/toast/Toast";
 import Loading from "../../components/loading/Loading";
+import api from "../../../service/api";
+import {Redirect} from "react-router";
 
 class Login extends Component {
 
     state = {
         toastMessage: null,
-        toastType: null,
         open: false,
         loading: false,
         formData: {
             email: '',
             password: ''
         },
-        checkFormData: false
+        checkFormData: false,
+        redirect: false
     }
 
     openToast() {
@@ -46,6 +48,36 @@ class Login extends Component {
         this.setState({
             loading: true
         });
+
+        api.post('users/session', this.state.formData).then(response => {
+            this.setState({
+                redirect: true
+            });
+        }).catch((error) => {
+            if (error.response) {
+
+                if(error.response.data.error === 'Bad Request') {
+                    return this.setState({
+                        toastMessage: error.response.data.validation.body.message,
+                        open: true,
+                        loading: false
+                    });
+                }
+
+                if(error.response.data.status === 'error') {
+                    return this.setState({
+                        toastMessage: error.response.data.message,
+                        open: true,
+                        loading: false
+                    });
+                }
+            }
+
+            return this.setState({
+                toastMessage: 'An error has occurred.',
+                open: true,
+            });
+        });
     }
 
     componentDidUpdate() {
@@ -63,6 +95,9 @@ class Login extends Component {
     render() {
         return (
             <div className={'content'}>
+                {this.state.redirect &&
+                <Redirect to={'/'}/>
+                }
                 <div className={'login'}>
                     <h1>Login</h1>
                     <p>Log in to your account</p>
@@ -86,7 +121,7 @@ class Login extends Component {
                     </span>
                 </div>
                 {this.state.open &&
-                <Toast text={this.state.toastMessage} type={this.state.toastType} toastFunction={this.closeToast}/>
+                <Toast text={this.state.toastMessage} type={'danger'} toastFunction={this.closeToast}/>
                 }
             </div>
         );

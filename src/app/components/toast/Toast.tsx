@@ -7,11 +7,20 @@ class Toast extends Component<ToastInterface> {
     timeout: any;
 
     componentDidMount() {
-        this.timeout = setTimeout(() => this.closeToast(), 6000);
+        this.autoCloseToast();
     }
 
     componentWillUnmount() {
         clearTimeout(this.timeout);
+    }
+
+    componentDidUpdate() {
+        clearTimeout(this.timeout);
+        this.autoCloseToast();
+    }
+
+    autoCloseToast() {
+        this.timeout = setTimeout(() => this.closeToast(), 6000);
     }
 
     closeToast() {
