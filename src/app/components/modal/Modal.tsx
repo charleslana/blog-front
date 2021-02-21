@@ -10,7 +10,7 @@ class Modal extends Component<ModalInterface> {
     }
 
     componentWillUnmount() {
-        document.body.style.overflow = 'unset';
+        document.body.style.overflow = '';
     }
 
     modalFunction = () => {
