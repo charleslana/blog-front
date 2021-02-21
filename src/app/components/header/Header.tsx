@@ -10,7 +10,6 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        console.log('mount');
         this.updateToken();
     }
 
