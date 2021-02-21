@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {ChangeEvent, Component} from 'react';
 import './index.css';
 import Toast from "../../components/toast/Toast";
 import Loading from "../../components/loading/Loading";
@@ -9,7 +9,12 @@ class Login extends Component {
         toastMessage: null,
         toastType: null,
         open: false,
-        loading: false
+        loading: false,
+        formData: {
+            email: '',
+            password: ''
+        },
+        checkFormData: false
     }
 
     openToast() {
@@ -27,6 +32,34 @@ class Login extends Component {
         });
     }
 
+    handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = event.target;
+        this.setState({
+            formData: {
+                ...this.state.formData,
+                [name]: value.trim()
+            }
+        });
+    }
+
+    handleSubmit = () => {
+        this.setState({
+            loading: true
+        });
+    }
+
+    componentDidUpdate() {
+        let check = true;
+        for (const [, value] of Object.entries(this.state.formData)) {
+            if (!value) {
+                check = false;
+            }
+        }
+        if (this.state.checkFormData !== check) {
+            this.setState({checkFormData: check});
+        }
+    }
+
     render() {
         return (
             <div className={'content'}>
@@ -34,16 +67,21 @@ class Login extends Component {
                     <h1>Login</h1>
                     <p>Log in to your account</p>
                     <label>
-                        <input type={'email'} id={'email'} placeholder={'Inform your email'}/>
+                        <input type={'email'} name={'email'} placeholder={'Inform your email'}
+                               onChange={this.handleInputChange}/>
                     </label>
                     <label>
-                        <input type={'password'} id={'password'} placeholder={'Inform your password'}/>
+                        <input type={'password'} name={'password'} placeholder={'Inform your password'}
+                               onChange={this.handleInputChange}/>
                     </label>
                     <label>
                         {this.state.loading ?
                             <button type={'button'} disabled={true}><Loading/>Login</button>
                             :
-                            <button type={'button'} onClick={() => this.openToast()}>Login</button>
+                            this.state.checkFormData ?
+                                <button type={'button'} onClick={this.handleSubmit}>Login</button>
+                                :
+                                <button type={'button'} disabled={true}>Login</button>
                         }
                     </label>
                 </div>
