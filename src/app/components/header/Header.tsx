@@ -52,6 +52,7 @@ class Header extends Component {
                     role: response.data.role
                 });
             }).catch((error) => {
+                this.logout();
                 if (error.response) {
                     return this.setState({});
                 }
