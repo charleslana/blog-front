@@ -7,6 +7,7 @@ import TokenInterface from "../interfaces/TokenInterface";
 import api from "../../../service/api";
 import Toast from "../toast/Toast";
 import Avatar from '../../../assets/layout/images/avatar.png';
+import UsersRoleEnum from "../../../service/interfaces/enums/UsersRoleEnum";
 
 class Header extends Component {
 
@@ -45,7 +46,10 @@ class Header extends Component {
         if (token) {
             api.get('/users/profile').then(response => {
                 this.setState({
-                    name: response.data.name
+                    name: response.data.name,
+                    email: response.data.email,
+                    avatar: response.data.avatar_url,
+                    role: response.data.role
                 });
             }).catch((error) => {
                 if (error.response) {
@@ -88,10 +92,17 @@ class Header extends Component {
                             <li><Link to={'/about'} className={'navBar'}>About</Link></li>
                             {this.state.token ?
                                 <>
+                                    {this.state.role !== UsersRoleEnum.USER &&
                                     <li><Link to={'/admin/comments'} className={'navBar'}>Comments</Link></li>
+                                    }
                                     <li className={'separator'}>{this.state.name}</li>
-                                    <li><img src={this.state.avatar ? this.state.avatar : Avatar} alt={'Avatar'}/></li>
-                                    <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
+                                    <li className={'arrow'}>
+                                        <img src={this.state.avatar ? this.state.avatar : Avatar} alt={'Avatar'}/>
+                                        <ul>
+                                            <p>{this.state.email}</p>
+                                            <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
+                                        </ul>
+                                    </li>
                                 </>
                                 :
                                 <>
