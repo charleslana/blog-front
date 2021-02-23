@@ -9,6 +9,7 @@ import Title from "../components/title/Title";
 import Post from "../views/post/Post";
 import Comments from "../views/admin/comments/Comments";
 import Header from "../components/header/Header";
+import NotFound from "../views/not-found/NotFound";
 
 class Routes extends Component {
 
@@ -39,6 +40,9 @@ class Routes extends Component {
                     <Route path={'/admin/comments'} exact={true}
                            render={(props) =>
                                (<Title text={'Comments'}><Header/><Comments/></Title>)}
+                    />
+                    <Route render={(props) =>
+                        (<Title text={'Page Not Found'}><Header/><NotFound/></Title>)}
                     />
                 </Switch>
             </ScrollToTop>
