@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {ChangeEvent, Component} from 'react';
 import './index.css';
 import BgHome from '../../../assets/layout/images/home.jpg';
 import Loading from "../../components/loading/Loading";
@@ -19,7 +19,9 @@ class Home extends Component<HomeInterface> {
         loading: true,
         update: undefined,
         open: false,
-        toastMessage: null
+        toastMessage: null,
+        text: '',
+        inputSearch: false
     }
 
     convertToObject(url: any) {
@@ -38,13 +40,14 @@ class Home extends Component<HomeInterface> {
             this.setState({update: 1});
         }
 
-        api.get(`posts?page=${page}`).then(response => {
+        api.post(`posts/filter?page=${page}`, {text: this.state.text}).then(response => {
             this.setState({
                 posts: response.data.data,
                 prev_page: response.data.prev_page,
                 next_page: response.data.next_page,
                 from: response.data.from,
-                loading: false
+                loading: false,
+                inputSearch: false
             });
         }).catch((error) => {
             if (error.response) {
@@ -60,6 +63,20 @@ class Home extends Component<HomeInterface> {
                 open: true,
             });
         });
+    }
+
+    handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        this.setState({text: event.target.value.trim()});
+    }
+
+    filterText = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            this.setState({
+                loading: true,
+                inputSearch: true
+            });
+            this.fetchPosts();
+        }
     }
 
     closeToast = () => {
@@ -101,7 +118,8 @@ class Home extends Component<HomeInterface> {
         return (
             <div>
                 <div className={'home-bg'} style={{backgroundImage: `url(${BgHome})`}}>
-                    <input type={'text'} placeholder={'Search'}/>
+                    <input type={'text'} placeholder={'Type a search and press enter'} disabled={this.state.inputSearch}
+                           onChange={this.handleInputChange} onKeyDown={this.filterText}/>
                 </div>
                 <div className={'home-content'}>
                     {this.state.loading ?
