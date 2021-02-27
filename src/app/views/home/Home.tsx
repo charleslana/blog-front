@@ -21,6 +21,7 @@ class Home extends Component<HomeInterface> {
         open: false,
         toastMessage: null,
         text: '',
+        preventText: '',
         inputSearch: false
     }
 
@@ -70,10 +71,11 @@ class Home extends Component<HomeInterface> {
     }
 
     filterText = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && this.state.text !== this.state.preventText) {
             this.setState({
                 loading: true,
-                inputSearch: true
+                inputSearch: true,
+                preventText: this.state.text
             });
             this.fetchPosts();
         }
