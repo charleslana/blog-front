@@ -16,7 +16,8 @@ class Header extends Component {
         token: null,
         name: null,
         avatar: undefined,
-        role: null
+        role: null,
+        dropdown: false
     }
 
     componentDidMount() {
@@ -64,6 +65,10 @@ class Header extends Component {
         });
     }
 
+    toggleDropdown = () => {
+        this.setState({dropdown: !this.state.dropdown});
+    }
+
     render() {
         return (
             <header>
@@ -79,11 +84,13 @@ class Header extends Component {
                             {this.state.token ?
                                 <>
                                     {this.state.role !== UsersRoleEnum.USER &&
-                                    <li className={'arrow'}>
+                                    <li className={'arrow'} onClick={this.toggleDropdown}>
                                         <p>Panel Admin</p>
-                                        <ul>
-                                            <li><Link to={'/admin/comments'}>Comments</Link></li>
-                                        </ul>
+                                        {this.state.dropdown &&
+                                            <ul>
+                                                <li><Link to={'/admin/comments'}>Comments</Link></li>
+                                            </ul>
+                                        }
                                     </li>
                                     }
                                     <li className={'separator'}>{this.state.name}</li>

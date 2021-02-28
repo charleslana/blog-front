@@ -58,7 +58,8 @@ header {
   color: white;
 }
 
-.header-b ul li a:hover {
+.header-b ul li a:hover,
+.header-b ul li p:hover {
   color: gray;
 }
 
@@ -110,10 +111,6 @@ header {
   display: none;
   background-color: black;
   border: 1px solid #2e4159;
-}
-
-.header-b ul li.arrow ul {
-  margin-top: 0 !important;
 }
 
 .header-b ul li:hover > ul,
