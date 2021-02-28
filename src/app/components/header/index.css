@@ -112,6 +112,10 @@ header {
   border: 1px solid #2e4159;
 }
 
+.header-b ul li.arrow ul {
+  margin-top: 0 !important;
+}
+
 .header-b ul li:hover > ul,
 .header-b ul li ul:hover {
   visibility: visible;
@@ -125,4 +129,12 @@ header {
   clear: both;
   width: 100%;
   text-transform: none;
+}
+
+.header-b ul li p {
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  position: relative;
+  cursor: pointer;
 }

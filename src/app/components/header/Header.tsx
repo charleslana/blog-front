@@ -29,7 +29,7 @@ class Header extends Component {
         if (token) {
             const {exp} = jwt_decode(token as string) as TokenInterface;
             if (Date.now() > (exp * 1000)) {
-                localStorage.removeItem('token');
+                localStorage.clear();
                 token = null;
             }
         }
@@ -79,7 +79,12 @@ class Header extends Component {
                             {this.state.token ?
                                 <>
                                     {this.state.role !== UsersRoleEnum.USER &&
-                                    <li><Link to={'/admin/comments'} className={'navBar'}>Comments</Link></li>
+                                    <li className={'arrow'}>
+                                        <p>Panel Admin</p>
+                                        <ul>
+                                            <li><Link to={'/admin/comments'}>Comments</Link></li>
+                                        </ul>
+                                    </li>
                                     }
                                     <li className={'separator'}>{this.state.name}</li>
                                     <li className={'arrow'}>
