@@ -17,7 +17,10 @@ class Login extends Component {
         },
         checkFormData: false,
         redirect: false,
-        token: ''
+        token: '',
+        userName: '',
+        userAvatar: '',
+        userRole: ''
     }
 
     openToast() {
@@ -53,12 +56,15 @@ class Login extends Component {
         api.post('users/session', this.state.formData).then(response => {
             this.setState({
                 redirect: true,
-                token: response.data.token
+                token: response.data.token,
+                userName: response.data.user.name,
+                userAvatar: response.data.user.avatar,
+                userRole: response.data.user.role
             });
         }).catch((error) => {
             if (error.response) {
 
-                if(error.response.data.error === 'Bad Request') {
+                if (error.response.data.error === 'Bad Request') {
                     return this.setState({
                         toastMessage: error.response.data.validation.body.message,
                         open: true,
@@ -66,7 +72,7 @@ class Login extends Component {
                     });
                 }
 
-                if(error.response.data.status === 'error') {
+                if (error.response.data.status === 'error') {
                     return this.setState({
                         toastMessage: error.response.data.message,
                         open: true,
@@ -94,6 +100,9 @@ class Login extends Component {
         }
         if (this.state.token !== '') {
             localStorage.setItem('token', this.state.token);
+            localStorage.setItem('name', this.state.userName);
+            localStorage.setItem('avatar', this.state.userAvatar ? this.state.userAvatar : '');
+            localStorage.setItem('role', this.state.userRole);
         }
     }
 

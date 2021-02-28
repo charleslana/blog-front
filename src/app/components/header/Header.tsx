@@ -4,7 +4,6 @@ import './index.css';
 import Logo from '../../../assets/layout/images/logo.png';
 import jwt_decode from 'jwt-decode';
 import TokenInterface from "../interfaces/TokenInterface";
-import api from "../../../service/api";
 import Toast from "../toast/Toast";
 import Avatar from '../../../assets/layout/images/avatar.png';
 import UsersRoleEnum from "../../../service/interfaces/enums/UsersRoleEnum";
@@ -16,14 +15,13 @@ class Header extends Component {
         toastMessage: null,
         token: null,
         name: null,
-        email: null,
         avatar: undefined,
         role: null
     }
 
     componentDidMount() {
         this.updateToken();
-        this.fetchProfile();
+        this.getLocalStorageProfile();
     }
 
     componentDidUpdate() {
@@ -37,30 +35,17 @@ class Header extends Component {
         }
         if (this.state.token !== token) {
             this.updateToken();
-            this.fetchProfile();
+            this.getLocalStorageProfile();
         }
     }
 
-    fetchProfile() {
+    getLocalStorageProfile() {
         const token = localStorage.getItem('token');
         if (token) {
-            api.get('/users/profile').then(response => {
-                this.setState({
-                    name: response.data.name,
-                    email: response.data.email,
-                    avatar: response.data.avatar_url,
-                    role: response.data.role
-                });
-            }).catch((error) => {
-                this.logout();
-                if (error.response) {
-                    return this.setState({});
-                }
-
-                return this.setState({
-                    toastMessage: 'An error has occurred.',
-                    open: true
-                });
+            this.setState({
+                name: localStorage.getItem('name'),
+                avatar: localStorage.getItem('avatar'),
+                role: localStorage.getItem('role')
             });
         }
     }
@@ -70,7 +55,7 @@ class Header extends Component {
     }
 
     logout() {
-        localStorage.removeItem('token');
+        localStorage.clear();
     }
 
     closeToast = () => {
@@ -100,7 +85,6 @@ class Header extends Component {
                                     <li className={'arrow'}>
                                         <img src={this.state.avatar ? this.state.avatar : Avatar} alt={'Avatar'}/>
                                         <ul>
-                                            <p>{this.state.email}</p>
                                             <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
                                         </ul>
                                     </li>

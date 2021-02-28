@@ -126,11 +126,3 @@ header {
   width: 100%;
   text-transform: none;
 }
-
-.header-b ul li ul p {
-  text-align: center;
-  clear: both;
-  width: 100%;
-  text-transform: none;
-  padding: 15px;
-}
