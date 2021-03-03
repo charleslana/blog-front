@@ -87,18 +87,20 @@ class Header extends Component {
                                     <li className={'arrow'} onClick={this.toggleDropdown}>
                                         <p>Panel Admin</p>
                                         {this.state.dropdown &&
-                                            <ul>
-                                                <li><Link to={'/admin/comments'}>Comments</Link></li>
-                                            </ul>
+                                        <ul>
+                                            <li><Link to={'/admin/comments'}>Comments</Link></li>
+                                        </ul>
                                         }
                                     </li>
                                     }
                                     <li className={'separator'}>{this.state.name}</li>
-                                    <li className={'arrow'}>
+                                    <li className={'arrow'} onClick={this.toggleDropdown}>
                                         <img src={this.state.avatar ? this.state.avatar : Avatar} alt={'Avatar'}/>
+                                        {this.state.dropdown &&
                                         <ul>
                                             <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
                                         </ul>
+                                        }
                                     </li>
                                 </>
                                 :
