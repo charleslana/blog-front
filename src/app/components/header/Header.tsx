@@ -69,6 +69,10 @@ class Header extends Component {
         this.setState({dropdown: !this.state.dropdown});
     }
 
+    exitDropdown = () => {
+        this.setState({dropdown: false});
+    }
+
     render() {
         return (
             <header>
@@ -84,7 +88,8 @@ class Header extends Component {
                             {this.state.token ?
                                 <>
                                     {this.state.role !== UsersRoleEnum.USER &&
-                                    <li className={'arrow'} onClick={this.toggleDropdown}>
+                                    <li className={'arrow'} onMouseLeave={this.exitDropdown}
+                                        onClick={this.toggleDropdown}>
                                         <p>Panel Admin</p>
                                         {this.state.dropdown &&
                                         <ul>
@@ -94,7 +99,8 @@ class Header extends Component {
                                     </li>
                                     }
                                     <li className={'separator'}>{this.state.name}</li>
-                                    <li className={'arrow'} onClick={this.toggleDropdown}>
+                                    <li className={'arrow'} onMouseLeave={this.exitDropdown}
+                                        onClick={this.toggleDropdown}>
                                         <img src={this.state.avatar ? this.state.avatar : Avatar} alt={'Avatar'}/>
                                         {this.state.dropdown &&
                                         <ul>

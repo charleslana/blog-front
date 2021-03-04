@@ -126,6 +126,7 @@ header {
   clear: both;
   width: 100%;
   text-transform: none;
+  border-bottom: 1px solid #2a2a2a;
 }
 
 .header-b ul li p {
