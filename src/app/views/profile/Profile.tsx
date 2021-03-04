@@ -49,11 +49,19 @@ class Profile extends Component {
         const {name, value} = event.target;
         this.setState({
             ...this.state,
-            [name]: value.trim()
+            [name]: value
         });
     }
 
     changeUsername = () => {
+        if (!this.state.name.trim()) {
+            return this.setState({
+                toastMessage: 'Username must not be empty.',
+                toastType: 'danger',
+                open: true
+            });
+        }
+
         this.setState({
             loading: true
         });
