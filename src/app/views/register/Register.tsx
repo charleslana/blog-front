@@ -64,7 +64,7 @@ class Register extends Component {
 
             return this.setState({
                 toastMessage: 'An error has occurred.',
-                open: true,
+                open: true
             });
         });
     }

@@ -33,15 +33,14 @@ class Profile extends Component {
                     toastMessage: error.response.data.message,
                     toastType: 'danger',
                     open: true,
-                    loading: false,
-                    title: null
+                    loading: false
                 });
             }
 
             return this.setState({
                 toastMessage: 'An error has occurred.',
                 toastType: 'danger',
-                open: true,
+                open: true
             });
         });
     }
@@ -63,11 +62,22 @@ class Profile extends Component {
             });
         }
 
+        if (!this.state.email.trim()) {
+            return this.setState({
+                toastMessage: 'Email must not be empty.',
+                toastType: 'danger',
+                open: true
+            });
+        }
+
         this.setState({
             loading: true
         });
 
-        api.put('users/profile', {name: this.state.name, email: this.state.email}).then(response => {
+        api.put('users/profile', {
+            name: this.state.name.trim(),
+            email: this.state.email.trim()
+        }).then(response => {
             this.setState({
                 toastMessage: response.data.message,
                 toastType: 'success',
@@ -76,18 +86,30 @@ class Profile extends Component {
             });
         }).catch((error) => {
             if (error.response) {
-                return this.setState({
-                    toastMessage: error.response.data.message,
-                    toastType: 'danger',
-                    open: true,
-                    loading: false
-                });
+
+                if(error.response.data.error === 'Bad Request') {
+                    return this.setState({
+                        toastMessage: error.response.data.validation.body.message,
+                        toastType: 'danger',
+                        open: true,
+                        loading: false
+                    });
+                }
+
+                if(error.response.data.status === 'error') {
+                    return this.setState({
+                        toastMessage: error.response.data.message,
+                        toastType: 'danger',
+                        open: true,
+                        loading: false
+                    });
+                }
             }
 
             return this.setState({
                 toastMessage: 'An error has occurred.',
                 toastType: 'danger',
-                open: true,
+                open: true
             });
         });
     }
@@ -117,7 +139,7 @@ class Profile extends Component {
                                        onChange={this.handleInputChange}/>
                             </label>
                             <label>
-                                <input type={'text'} name={'name'} value={this.state.email}
+                                <input type={'text'} name={'email'} value={this.state.email}
                                        onChange={this.handleInputChange}/>
                             </label>
                             <span>
