@@ -93,7 +93,7 @@ class Header extends Component {
                                         <p>Panel Admin</p>
                                         {this.state.dropdown &&
                                         <ul>
-                                            <li><Link to={'/admin/comments'}>Comments</Link></li>
+                                            <Link to={'/admin/comments'}><li>Comments</li></Link>
                                         </ul>
                                         }
                                     </li>
@@ -104,8 +104,8 @@ class Header extends Component {
                                         <img src={this.state.avatar ? this.state.avatar : Avatar} alt={'Avatar'}/>
                                         {this.state.dropdown &&
                                         <ul>
-                                            <li><Link to={'/profile'}>Profile</Link></li>
-                                            <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
+                                            <Link to={'/profile'}><li>Profile</li></Link>
+                                            <Link to={'/'} onClick={() => this.logout()}><li>Logout</li></Link>
                                         </ul>
                                         }
                                     </li>
