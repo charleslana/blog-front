@@ -10,6 +10,7 @@ import Post from "../views/post/Post";
 import Comments from "../views/admin/comments/Comments";
 import Header from "../components/header/Header";
 import NotFound from "../views/not-found/NotFound";
+import Profile from "../views/profile/Profile";
 
 class Routes extends Component {
 
@@ -36,6 +37,10 @@ class Routes extends Component {
                     <Route path={'/post/:id'} exact={true}
                            render={(props) =>
                                (<Title text={'Post'}><Header/><Post storage={props}/></Title>)}
+                    />
+                    <Route path={'/profile'} exact={true}
+                           render={(props) =>
+                        (<Title text={'Profile'}><Header/><Profile/></Title>)}
                     />
                     <Route path={'/admin/comments'} exact={true}
                            render={(props) =>

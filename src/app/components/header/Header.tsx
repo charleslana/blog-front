@@ -98,6 +98,7 @@ class Header extends Component {
                                         <img src={this.state.avatar ? this.state.avatar : Avatar} alt={'Avatar'}/>
                                         {this.state.dropdown &&
                                         <ul>
+                                            <li><Link to={'/profile'}>Profile</Link></li>
                                             <li><Link to={'/'} onClick={() => this.logout()}>Logout</Link></li>
                                         </ul>
                                         }
