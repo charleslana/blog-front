@@ -83,8 +83,8 @@ class Header extends Component {
                     </div>
                     <div className={'header-b'}>
                         <ul>
-                            <li><Link to={'/'} className={'navBar'}>Home</Link></li>
-                            <li><Link to={'/about'} className={'navBar'}>About</Link></li>
+                            <Link to={'/'} className={'navBar'}><li>Home</li></Link>
+                            <Link to={'/about'} className={'navBar'}><li>About</li></Link>
                             {this.state.token ?
                                 <>
                                     {this.state.role !== UsersRoleEnum.USER &&
@@ -112,8 +112,8 @@ class Header extends Component {
                                 </>
                                 :
                                 <>
-                                    <li><Link to={'/login'} className={'navBar'}>Login</Link></li>
-                                    <li><Link to={'/register'} className={'navBar'}>Register</Link></li>
+                                    <Link to={'/login'} className={'navBar'}><li>Login</li></Link>
+                                    <Link to={'/register'} className={'navBar'}><li>Register</li></Link>
                                 </>
                             }
                         </ul>

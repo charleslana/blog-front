@@ -54,14 +54,18 @@ header {
   cursor: pointer;
 }
 
-.header-b ul li a {
-  text-decoration: none;
+.header-b ul li {
   color: white;
 }
 
-.header-b ul li a:hover,
-.header-b ul li p:hover {
+.header-b ul li:hover,
+.header-b ul li.arrow:hover {
   color: gray;
+}
+
+.header-b ul li.separator {
+  cursor: auto;
+  color: white;
 }
 
 .header-b ul li.separator:after {
