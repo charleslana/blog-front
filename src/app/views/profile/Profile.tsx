@@ -40,6 +40,7 @@ class Profile extends Component {
 
             return this.setState({
                 toastMessage: 'An error has occurred.',
+                toastType: 'danger',
                 open: true,
             });
         });
@@ -66,10 +67,28 @@ class Profile extends Component {
             loading: true
         });
 
-        this.setState({
-            toastMessage: 'Change Username successfully!',
-            toastType: 'success',
-            open: true
+        api.put('users/profile', {name: this.state.name, email: this.state.email}).then(response => {
+            this.setState({
+                toastMessage: response.data.message,
+                toastType: 'success',
+                open: true,
+                loading: false
+            });
+        }).catch((error) => {
+            if (error.response) {
+                return this.setState({
+                    toastMessage: error.response.data.message,
+                    toastType: 'danger',
+                    open: true,
+                    loading: false
+                });
+            }
+
+            return this.setState({
+                toastMessage: 'An error has occurred.',
+                toastType: 'danger',
+                open: true,
+            });
         });
     }
 
@@ -92,9 +111,13 @@ class Profile extends Component {
                         :
                         <>
                             <h1>Profile</h1>
-                            <p>Change Username:</p>
+                            <p>Change Profile:</p>
                             <label>
                                 <input type={'text'} name={'name'} value={this.state.name}
+                                       onChange={this.handleInputChange}/>
+                            </label>
+                            <label>
+                                <input type={'text'} name={'name'} value={this.state.email}
                                        onChange={this.handleInputChange}/>
                             </label>
                             <span>
