@@ -58,8 +58,7 @@ header {
   color: white;
 }
 
-.header-b ul li:hover,
-.header-b ul li.arrow:hover {
+.header-b ul li:hover {
   color: gray;
 }
 
