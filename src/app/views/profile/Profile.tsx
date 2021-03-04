@@ -15,6 +15,7 @@ class Profile extends Component {
         confirmNewPassword: null,
         open: false,
         toastMessage: null,
+        toastType: null,
         loading: true
     }
 
@@ -30,6 +31,7 @@ class Profile extends Component {
             if (error.response) {
                 return this.setState({
                     toastMessage: error.response.data.message,
+                    toastType: 'danger',
                     open: true,
                     loading: false,
                     title: null
@@ -54,6 +56,12 @@ class Profile extends Component {
     changeUsername = () => {
         this.setState({
             loading: true
+        });
+
+        this.setState({
+            toastMessage: 'Change Username successfully!',
+            toastType: 'success',
+            open: true
         });
     }
 
@@ -88,7 +96,7 @@ class Profile extends Component {
                     }
                 </div>
                 {this.state.open &&
-                <Toast text={this.state.toastMessage} type={'danger'} toastFunction={this.closeToast}/>
+                <Toast text={this.state.toastMessage} type={this.state.toastType} toastFunction={this.closeToast}/>
                 }
             </div>
         );
