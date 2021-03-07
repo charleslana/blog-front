@@ -84,6 +84,7 @@ class Profile extends Component {
                 open: true,
                 loading: false
             });
+            localStorage.setItem('name', this.state.name);
         }).catch((error) => {
             if (error.response) {
 

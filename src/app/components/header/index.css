@@ -62,21 +62,9 @@ header {
   color: gray;
 }
 
-.header-b ul li.separator {
+.header-b ul li.text {
   cursor: auto;
   color: white;
-}
-
-.header-b ul li.separator:after {
-  content: "|";
-  float: left;
-  color: white;
-  justify-content: center;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  line-height: 94%;
-  margin-left: -25%;
 }
 
 .header-b ul li img {

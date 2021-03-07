@@ -98,7 +98,7 @@ class Header extends Component {
                                         }
                                     </li>
                                     }
-                                    <li className={'separator'}>{this.state.name}</li>
+                                    <li className={'text'}>{this.state.name}</li>
                                     <li className={'arrow'} onMouseLeave={this.exitDropdown}
                                         onClick={this.toggleDropdown}>
                                         <img src={this.state.avatar ? this.state.avatar : Avatar} alt={'Avatar'}/>
